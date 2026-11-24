@@ -1,0 +1,32 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+:root { --ink: 30 26 23; --clay: 200 155 139; --clay-dark: 166 90 72; --sand: 248 240 235; --cream: 252 248 245; --line: 229 217 208; --muted: 77 64 54; --surface: 255 255 255; }
+.dark { --ink: 237 230 224; --clay: 200 155 139; --clay-dark: 222 160 140; --sand: 42 36 32; --cream: 26 22 20; --line: 61 53 46; --muted: 206 195 186; --surface: 38 32 28; color-scheme: dark; }
+@layer base { body { @apply bg-cream text-ink font-body antialiased; } h1,h2,h3,h4 { @apply font-display font-semibold; } }
+@layer components {
+  .card { @apply bg-surface border border-line rounded-3xl shadow-sm; }
+  .btn { @apply inline-flex items-center justify-center rounded-full px-7 py-3 font-semibold transition disabled:opacity-40; }
+  .btn-dark { @apply btn bg-ink text-cream hover:bg-[#3D352E]; }
+  .btn-line { @apply btn border-[1.5px] border-ink hover:bg-ink hover:text-cream; }
+  .field { @apply w-full px-4 py-3 rounded-2xl border-[1.5px] border-line bg-cream focus:outline-none focus:border-clay; }
+  .label { @apply block text-sm font-medium mb-1.5; }
+}
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.show { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+@keyframes floaty { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-24px) scale(1.06); } }
+@keyframes pagein { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes fall { 0% { transform: translateY(-10vh) rotate(0); opacity: 1; } 100% { transform: translateY(105vh) rotate(720deg); opacity: .9; } }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+.float { animation: floaty 9s ease-in-out infinite; } .float-slow { animation: floaty 14s ease-in-out infinite reverse; }
+.page-in { animation: pagein .5s ease both; } .pop { animation: pop .6s ease both; }
+.marquee { display: flex; width: max-content; animation: marquee 28s linear infinite; } .marquee:hover { animation-play-state: paused; }
+.glass { background: rgb(255 255 255 / .12); backdrop-filter: blur(10px); border: 1px solid rgb(255 255 255 / .25); }
+.btn-dark { position: relative; overflow: hidden; }
+.btn-dark::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / .25) 50%, transparent 70%); transform: translateX(-120%); transition: transform .7s; }
+.btn-dark:hover::after { transform: translateX(120%); }
+.hero-text { background: linear-gradient(90deg, #C89B8B, #F2E3DB, #C89B8B); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 5s linear infinite; }
+@keyframes shine { to { background-position: 200% center; } }
+@media (prefers-reduced-motion: reduce) { .float, .float-slow, .marquee, .hero-text, .page-in, .pop { animation: none; } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.draw { stroke-dasharray: 1; animation: draw 1.6s ease forwards; }

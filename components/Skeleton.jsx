@@ -1,0 +1,2 @@
+export const Skeleton = ({ className = '' }) => <div className={`animate-pulse bg-sand rounded-2xl ${className}`} />;
+export const PageSkeleton = () => (<div className="mx-auto max-w-6xl px-6 py-12 space-y-6" aria-busy="true" aria-label="Loading"><Skeleton className="h-10 w-64" /><div className="grid grid-cols-2 lg:grid-cols-4 gap-4">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-24" />)}</div><Skeleton className="h-72" /></div>);
